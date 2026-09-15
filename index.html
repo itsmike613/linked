@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+
+<head>
+    <!-- Meta -->
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="LINKED" property="og:title">
+    <meta content="Match it. Link it. Clear your hand." property="og:description">
+    <meta content="https://itsmike613.github.io/linked/" property="og:url">
+    <meta content="https://github.com/itsmike613/linked/blob/main/Source/Images/logo.png?raw=true" property="og:image">
+    <meta content="#88413A" data-react-helmet="true" name="theme-color">
+
+    <!-- Tab -->
+    <link rel="icon" type="image/x-icon" href="Source/Images/logo.png">
+    <title>LINKED</title>
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="Source/Styles/index.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&display=swap">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/regular/style.css">
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js" defer></script>
+</head>
+
+<body>
+    <header class="bar">
+        <button class="brand" data-go="home" aria-label="Home">
+            <img src="Source/Images/logo.png" alt="">
+            <span data-title></span>
+        </button>
+        <div class="tools">
+            <button class="tool" aria-label="Next game" onclick="location.href='https://itsmike613.github.io/recall/'"><i class="ph ph-squares-four"></i><span>LI</span></button>
+            <button class="tool" id="theme" aria-label="Theme"><i class="ph ph-sun"></i><span>LM</span></button>
+            <button class="tool" id="lang" aria-label="Language"><i class="ph ph-globe"></i><span>EN</span></button>
+        </div>
+    </header>
+
+    <main class="shell">
+        <section class="page active" id="home">
+            <div class="hero">
+                <img class="mark" src="Source/Images/logo.png" alt="">
+                <h1 data-logo></h1>
+                <p data-t="tagline"></p>
+                <div class="stack">
+                    <button class="primary" data-go="setup" data-t="play"></button>
+                    <button data-go="settings" data-t="settings"></button>
+                    <button data-go="help" data-t="help"></button>
+                </div>
+            </div>
+        </section>
+
+        <section class="page" id="setup">
+            <div class="head">
+                <div>
+                    <p class="eyebrow" data-t="newgame"></p>
+                    <h2 data-t="setup"></h2>
+                </div>
+                <button class="icon" data-go="home" aria-label="Home"><i class="ph ph-x"></i></button>
+            </div>
+            <div class="panel" id="options"></div>
+            <div class="actions"><button data-go="home" data-t="back"></button><button class="primary" id="start" data-t="start"></button></div>
+        </section>
+
+        <section class="page" id="play">
+            <div class="head">
+                <div>
+                    <p class="eyebrow" id="status"></p>
+                    <h2 data-title></h2>
+                </div>
+                <button class="icon" id="quit" aria-label="Home"><i class="ph ph-x"></i></button>
+            </div>
+            <div class="stats">
+                <div class="stat"><span data-t="time"></span><strong id="time">00:00.000</strong></div>
+                <div class="stat"><span data-t="moves"></span><strong id="moves">0</strong></div>
+            </div>
+            <div class="table" id="table" role="group" aria-label="Card table">
+                <section class="seat ai">
+                    <div class="seathead"><b data-t="ai"></b><span id="aicount"></span></div>
+                    <div class="aicards" id="aicards" aria-hidden="true"></div>
+                </section>
+                <section class="center">
+                    <div class="pilebox">
+                        <button class="pile draw" id="draw" type="button"></button>
+                        <span class="pilecount" id="drawcount"></span>
+                    </div>
+                    <div class="pilebox">
+                        <div class="pile discard" id="discard"></div>
+                        <span class="pilecount" id="discardcount"></span>
+                        <span class="activecolor" id="activecolor"></span>
+                    </div>
+                </section>
+                <div class="colorpick" id="colorpick" aria-label="Choose color"></div>
+                <p class="gamemsg" id="message" aria-live="polite"></p>
+                <section class="seat human">
+                    <div class="seathead"><b data-t="you"></b><span id="youcount"></span></div>
+                    <div class="hand" id="hand"></div>
+                </section>
+            </div>
+            <div class="gameactions"><button class="primary" id="endturn" data-t="endturn" disabled></button></div>
+            <div class="panel activity">
+                <div class="seathead activityhead"><b data-t="activity"></b><span data-t="lastthree"></span></div>
+                <div id="activitylog"></div>
+            </div>
+        </section>
+
+        <section class="page" id="results">
+            <div class="head">
+                <div>
+                    <p class="eyebrow" data-t="complete"></p>
+                    <h2 data-t="results"></h2>
+                </div>
+            </div>
+            <p class="notice" id="resultnote"></p>
+            <div class="results" id="scores"></div>
+            <div class="actions"><button id="replay" data-t="replay"></button><button class="primary" data-go="setup" data-t="setup"></button></div>
+        </section>
+
+        <section class="page" id="settings">
+            <div class="head">
+                <div>
+                    <p class="eyebrow" data-t="preferences"></p>
+                    <h2 data-t="settings"></h2>
+                </div><button class="icon" data-go="home" aria-label="Home"><i class="ph ph-x"></i></button>
+            </div>
+            <div class="panel settings">
+                <label class="setting"><span><b data-t="handorder"></b><small data-t="orderhelp"></small></span><select id="handorder"></select></label>
+                <label class="setting"><span><b data-t="aipace"></b><small data-t="pacehelp"></small></span><select id="aipace"></select></label>
+                <label class="setting"><span><b data-t="first"></b><small data-t="firsthelp"></small></span><select id="first"></select></label>
+            </div>
+        </section>
+
+        <section class="page" id="help">
+            <div class="head">
+                <div>
+                    <p class="eyebrow" data-t="guide"></p>
+                    <h2 data-t="help"></h2>
+                </div><button class="icon" data-go="home" aria-label="Home"><i class="ph ph-x"></i></button>
+            </div>
+            <div class="help" id="helpcopy"></div>
+        </section>
+    </main>
+
+    <!-- Body Scripts -->
+    <script src="Source/Data/index.js"></script>
+    <script src="Source/Scripts/index.js"></script>
+</body>
+
+</html>
